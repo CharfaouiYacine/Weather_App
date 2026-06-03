@@ -7,7 +7,7 @@ async function get_weather(name) {
             let data = await response.json()
             return data
         } else {
-            console.log("Error " + response.status)
+            return null
         }
     }catch (error){
         console.log("Something went wrong :"+ error.name)
@@ -19,7 +19,8 @@ async function main(){
     const output = document.getElementById("data")
     fetcher.addEventListener("click",async ()=>{
         let result =await get_weather(input.value)
-output.innerHTML =` 
+        if(result !== null) {
+            output.innerHTML = ` 
 <h3>📍Weather in  ${input.value}</h3>
 <hr>
 <p>🧾name: ${result.location.name} - ${result.location.country}</p>    
@@ -28,6 +29,9 @@ output.innerHTML =`
 <p>🌡️Temp in Fahrenheit: ${result.current.temp_f}°F</p>
 <p>⛅ The Weather: ${result.current.condition.text}</p>
 `
+}else{
+            output.innerHTML = `City not found ❌`
+        }
     })
 }
 main()
