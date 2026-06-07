@@ -1,4 +1,4 @@
-const api_key = "8c86b2138c00447ead4102606261004"
+const api_key = "Mykey"
 
 async function get_weather(name) {
     try{
